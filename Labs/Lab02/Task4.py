@@ -18,15 +18,23 @@ class System :
                 self.vulnerabilities[0].append(f"component {iter}")
             if component == 2 :
                 self.vulnerabilities[1].append(f"component {iter}")
-        print(f"{self.components if self.components not in self.vulnerabilities[0][-1] and self.components not in self.vulnerabilities[1][-1] else None}\nThese components are functional\n\n{self.vulnerabilities[0]}\nThese components have low vulnerability\n\n{self.vulnerabilities[1] if self.vulnerabilities[1] else None}\nThese components have high vulnerability\n")
+        if (self.vulnerabilities[0] == [] and self.vulnerabilities[1] == []) :
+            print("System is Safe")
+        elif (self.vulnerabilities[0] != [] and self.vulnerabilities[1] != []) :
+            print(f"These components are vulnerable to Low level attacks: {self.vulnerabilities[0]}\nThese components are vulnerable to High level attacks: {self.vulnerabilities[1]}")
+        elif (self.vulnerabilities[0] != []) :
+            print(f"These components are vulnerable to Low level attacks: {self.vulnerabilities[0]}")
+        elif (self.vulnerabilities[1] != []) :
+            print(f"These components are vulnerable to High level attacks: {self.vulnerabilities[1]}")
 class Agent :
-    def __init__(self, system) :
+    def __init__(self, system: System) :
         self.system = system
         self.logs = []
     
     def patch(self) :
         self.system.components = [1 for component in self.system.components]
-        print(f"{self.system.vulnerabilities[0]}\nThese components had low vulnerability and have been patched\n")
+        print(f"{self.system.vulnerabilities[0]}: These components had low vulnerability and have been patched\n")
+        self.system.vulnerabilities[0].clear()
 
     def search(self) :
         for component in self.system.components :
