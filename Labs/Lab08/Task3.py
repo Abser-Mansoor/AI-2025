@@ -1,3 +1,10 @@
+import numpy as np
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
+import networkx as nx
+import matplotlib.pyplot as plt
+
 disease_states = ['Flu', 'Cold']
 symptom_states = ['Yes', 'No']
 
